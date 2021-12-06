@@ -1,0 +1,5 @@
+AddType application/x-httpd-php .html .htm
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^(.*).html$ index.php?f=$1.html&%{QUERY_STRING} [L]
+AddType application/x-httpd-php .php .php3 .php4 .phtml .html

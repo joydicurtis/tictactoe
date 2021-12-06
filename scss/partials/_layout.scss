@@ -1,0 +1,57 @@
+//vars
+$content-width: 1220px;
+$content-width--small: 940px;
+$content-gutters: 25px;
+
+.row {
+    position: relative;
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: 0 $content-gutters;
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+.row--small {
+    max-width: $content-width--small;
+}
+.siteSection {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.siteSection--noPad {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+//in case we have sidebar
+$sidebar-width: 300px;
+.row.has-sidebar {
+    @include breakpoint(large) {
+        padding-right: $sidebar-width;
+    }
+    .siteContent-body {
+        @include breakpoint(large) {
+            padding-right: $content-gutters*2;
+        }
+    }
+}
+.siteContent-body {
+    @include breakpoint(large) {
+        float: left;
+        width: 100%;
+        padding-right: 0;
+    }
+}
+.siteContent-side {
+    position: relative;
+    @include breakpoint(large) {
+        float: left;
+        width: $sidebar-width;
+        margin-left: -$sidebar-width;
+        left: $sidebar-width;
+    }
+}

@@ -1,0 +1,70 @@
+/* HTML usage
+<div class="grid grid-medium-3 grid-large-5 u-clearfix">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+</div>
+*/
+
+// VARS
+$grid-gutters: 10px;
+$grid-gutters--mobile: 10px;
+.grid {
+    margin-left: -$grid-gutters--mobile;
+    margin-right: -$grid-gutters--mobile;
+    @include breakpoint(medium) {
+        margin-left: -$grid-gutters;
+        margin-right: -$grid-gutters;
+    }
+}
+.grid-item {
+    margin-bottom: $grid-gutters--mobile*2;
+    padding-left: $grid-gutters--mobile;
+    padding-right: $grid-gutters--mobile;
+    @include breakpoint(medium) {
+        float: left;
+        margin-bottom: $grid-gutters*2;
+        padding-left: $grid-gutters;
+        padding-right: $grid-gutters;
+    }
+    .grid-small-2 & {
+        float: left;
+        width: 50%;
+    }
+    .grid-medium-2 & {
+        @include breakpoint(medium) {
+            width: 50%;
+        }
+    }
+    .grid-medium-3 & {
+        @include breakpoint(medium) {
+            width: 33.33%;
+        }
+    }
+    .grid-medium-4 & {
+        @include breakpoint(medium) {
+            width: 25%;
+        }
+    }
+    .grid-large-2 & {
+        @include breakpoint(large) {
+            width: 50%;
+        }
+    }
+    .grid-large-3 & {
+        @include breakpoint(large) {
+            width: 33.33%;
+        }
+    }
+    .grid-large-4 & {
+        @include breakpoint(large) {
+            width: 25%;
+        }
+    }
+    .grid-large-5 & {
+        @include breakpoint(large) {
+            width: 20%;
+        }
+    }
+}
+
