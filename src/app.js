@@ -4,12 +4,11 @@ import stepSound from './assets/sounds/step.wav';
 
 let player = 'X';
 let player2 = 'O';
-let arrayFields;
 let resetButton = document.getElementById('resetButton');
 let newButton = document.getElementById('newButton');
 let muteButton = document.getElementById('muteButton');
 let field;
-let fields = document.getElementById('fields');
+let fields = document.getElementById('board');
 let winMessage = document.getElementById('message');
 let winner = document.getElementById('winner');
 let x = document.getElementById('playerX');
@@ -31,7 +30,6 @@ winAudio.src = winSound;
 stepAudio.src = stepSound;
 stepAudio.muted = false;
 winAudio.muted = false;
-
 class TicTacToe {
   constructor() {
     this.turn = Math.floor(Math.random() * 2);
@@ -58,7 +56,7 @@ class TicTacToe {
   initGame() {
     for (let i=0; i<9; i++) {
       let field = document.createElement('div');
-      field.classList.add('field');
+      field.classList.add('field board__item');
       field.setAttribute('field-id', i);
       field.addEventListener('click', this.playerMove());
       fields.appendChild(field);
@@ -66,7 +64,7 @@ class TicTacToe {
       fields.appendChild(winAudio);
       this.arrayFields.push(field);
     }
-    this.field = document.getElementsByClassName('field');
+    this.field = document.getElementsByClassName('board__item');
     this.turn = Math.floor(Math.random() * 2);
     if (this.turn === 1) {
       this.playerTwoMove();

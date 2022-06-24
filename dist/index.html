@@ -5,40 +5,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
         <title>Cat Fish Toe Game</title>
-        <!-- CSS -->
-        <link rel="stylesheet" href="style.min.css">
     <script defer src="bundle.js"></script><link href="style.min.css" rel="stylesheet"></head>
     <body>
         <div class="container">
-            <main class="content">
-                <div class="box-fields">
-                    <button (onClick)="resetGame()" id="newButton" class="button"><span class="button-icon button-icon_new"></span></button>
-                    <div class="logo">
-                        TicTacToe
-                    </div>
-                    <button (onClick)="muteSound()" id="muteButton" class="button"><span class="button-icon button-icon_mute"></span></button>
+            <div class="box-fields">
+                <button (onClick)="resetGame()" id="newButton" class="button"><span class="button-icon button-icon_new"></span></button>
+                <div class="logo">
+                    TicTacToe
                 </div>
-                <div class="fields" id="fields"></div>
-            </main>
+                <button (onClick)="muteSound()" id="muteButton" class="button"><span class="button-icon button-icon_mute"></span></button>
+            </div>
+            <div class="board" id="board"></div>
+            <div class="dialog start" id="start">
+                <p class="dialog__start-text">Please choose a player:</p>
+                <div class="dialog__start-heroes">
+                    <div class="board__item cat" id="playerX"></div>
+                    <div class="board__item fish" id="playerO" ></div>
+                </div>
+            </div>
+            <div class="dialog winner hidden" id="winner">
+                <div class="winner-content">
+                    <div class="winner-text" id="message">
+                        <div class="winner-message"></div>
+                    </div>
+                    <button (onClick)="resetGame()" id="resetButton" class="button">New Game</button>
+                </div>
+            </div>
         </div>
+       
         <footer class="siteFooter">
             All Rights Reserved©2021
         </footer>
-        <div class="start" id="start">
-            <p class="start-text">Please choose animal:</p>
-            <div class="start-content">
-                <div id="playerX" class="field cat"></div>
-                <div id="playerO" class="field fish"></div>
-            </div>
-        </div>
-        <div class="winner hidden" id="winner">
-            <div class="winner-content">
-                <div class="winner-text" id="message">
-                    <div class="winner-message"></div>
-                </div>
-                <button (onClick)="resetGame()" id="resetButton" class="button">New Game</button>
-            </div>
-        </div>
-        <script src="bundle.js"></script>
     </body>
 </html>

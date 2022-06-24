@@ -1,37 +1,67 @@
-
-.content {
-    display: flex;
-    align-items: center;
-    flex-flow: column
-}
-.fields {
+.nav {
     width: 600px;
     display: flex;
-    height: 600px;
-    background: #f9e6ab;
-    border: solid 4px #6e4825;
-    flex-wrap: wrap;
-    box-sizing: content-box;
+    justify-content: space-between;
     margin-bottom: 16px;
 }
-.field {
-    width: 200px;
-    height: 200px;
+
+.dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    &__start-text {
+        color: #fff;
+        font-size: 1.5rem;
+    }
+    &__start-heroes {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    width: 18rem;
+    height: 18rem;
     background: #f9e6ab;
     border: solid 4px #6e4825;
-    user-select: none;
-    &:after {
-        content: '';
-        opacity: 0;
+    margin-bottom: 16px;
+    @include breakpoint(medium) {
+        width: 600px;
+        height: 600px;
     }
-    &:hover,
-    &:focus {
+    &__item {
+        width: 6rem;
+        height: 6rem;
+        background: #f9e6ab;
+        border: solid 4px #6e4825;
+        user-select: none;
         cursor: pointer;
+        @include breakpoint(medium) {
+            width: 200px;
+            height: 200px;
+        }
+        &:after {
+            content: '';
+            opacity: 0;
+        }
     }
 }
 .hasWinner,
 .hasHero {
-    .field {
+    .board__item {
         position: relative;
         transition: all .3s ease-in-out;
         &:not(.win):not(.hero) {
@@ -56,18 +86,7 @@
     background: url(../assets/images/fish.svg) #f9e6ab;
 }
 .winner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, .7);
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    visibility: visible;
-    opacity: 1;
+    
     &.hidden {
         .winner-content {
             transition: all .3s ease-in-out;
@@ -105,7 +124,7 @@
     border-radius: 30px;
     font-size: 20px;
     padding: 10px 20px;
-    font-family: $font-base;
+    font-family: 'Modak', cursive;
     font-size: 20px;
     color: white;
     text-shadow: 0 0 2px #a10000;
@@ -133,38 +152,17 @@
     }
 }
 
-.box-fields {
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
+
 
 .start {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, .7);
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    visibility: visible;
-    opacity: 1;
+    
     &.hidden {
         visibility: hidden;
         opacity: 0;
     }
-    .start-text {
-        color: #fff;
-        font-size: 20px;
-    }
     .start-content {
-        display: flex;
-        justify-content: center;
-        .field {
+        
+        .board__item {
             margin: 0 16px;
             &:hover,
             &:focus {
