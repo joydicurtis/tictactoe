@@ -1,4 +1,7 @@
 'use strict';
+import winSound from './assets/sounds/win.wav'; 
+import stepSound from './assets/sounds/step.wav';
+
 let player = 'X';
 let player2 = 'O';
 let arrayFields;
@@ -24,8 +27,8 @@ let stepAudio;
 let winAudio;
 stepAudio = document.createElement("audio");
 winAudio = document.createElement("audio");
-winAudio.src = "assets/sounds/win.wav";
-stepAudio.src = "assets/sounds/step.wav";
+winAudio.src = winSound;
+stepAudio.src = stepSound;
 stepAudio.muted = false;
 winAudio.muted = false;
 
