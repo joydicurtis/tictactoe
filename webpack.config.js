@@ -10,8 +10,8 @@ module.exports = {
         './src/scss/application.scss',
     ],
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+      path: __dirname + '/dist',
+      filename: 'bundle.js'
     },
     module: {
         rules: [
@@ -24,9 +24,16 @@ module.exports = {
             ],
           },
           {
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]',
+            },
+          },
+          {
             test: /\.wav$/,
             loader: 'file-loader'
-          }
+          },
         ],
         
       },
