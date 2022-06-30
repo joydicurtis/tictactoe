@@ -31,7 +31,7 @@ body {
     font-family: 'Carter One', cursive;
     font-size: 1rem;
     line-height: 1.5rem;    
-    background-image: $gradient-background;
+    background: url('../assets/images/lanscape-bg.svg') no-repeat bottom center, $gradient-background;
 }
 
 .visually-hidden {
@@ -121,7 +121,7 @@ body {
     justify-content: center;
     gap: 2px;
     width: 16rem;
-    margin-bottom: 16px;
+    margin: 0 auto 1rem;
     @include breakpoint(medium) {
         width: 37rem;
         margin: 0 auto;
@@ -141,7 +141,7 @@ body {
     bottom: 0;
     right: 0;
     padding: 6.5rem 1rem;
-    background-image: $gradient-background;
+    background: url('../assets/images/lanscape-bg.svg') no-repeat bottom center, $gradient-background;
     text-align: center;
     opacity: 1;
     visibility: visible;
