@@ -4,37 +4,61 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
-        <title>Cat Fish Toe Game</title>
+        <title>Tic Tac Toe Game</title>
     <script defer src="bundle.js"></script><link href="style.min.css" rel="stylesheet"></head>
     <body>
         <div class="container">
-            <div class="box-fields">
-                <button (onClick)="resetGame()" id="newButton" class="button"><span class="button-icon button-icon_new"></span></button>
-                <div class="logo">
-                    TicTacToe
-                </div>
-                <button (onClick)="muteSound()" id="muteButton" class="button"><span class="button-icon button-icon_mute"></span></button>
+            <nav class="nav">
+                <button class="button" type="button" id="reset-button">
+                    <svg class="button__icon"  fill="currentColor" viewBox="0 0 16 14">
+                        <path d="M13.571 6.165C13.25 2.712 10.338 0 6.802 0A6.81 6.81 0 0 0 0 6.802a6.81 6.81 0 0 0 6.802 6.803v-2.551a4.256 4.256 0 0 1-4.251-4.252 4.256 4.256 0 0 1 4.251-4.251A4.253 4.253 0 0 1 11 6.165H8.446l3.777 4.995L16 6.165h-2.429Z"/>
+                    </svg>
+                </button>
+                <button class="button" type="button" id="mute-button">
+                    <svg fill="currentColor" class="button__icon" viewBox="0 0 16 17">
+                        <path d="M4.042 4.21A4.038 4.038 0 0 0 0 8.253a4.042 4.042 0 0 0 4.042 4.042h.832l4.726 4.21V0L4.874 4.21h-.832Zm7.072.506L16 3.2V.673l-4.886 4.043M16 9.726V6.778l-4.886 1.475L16 9.726Zm0 6.104v-2.525l-4.886-1.516L16 15.831Z"/>
+                    </svg>
+                </button>
+            </nav>
+            <div class="board">
+                <input class="board__checkbox" type="checkbox" id="0">
+                <label class="hero board__item" for="0"></label>
+                <input class="board__checkbox" type="checkbox" id="1">
+                <label class="hero board__item" for="1"></label>
+                <input class="board__checkbox" type="checkbox" id="2">
+                <label class="hero board__item" for="2"></label>
+                <input class="board__checkbox" type="checkbox" id="3">
+                <label class="hero board__item" for="3"></label>
+                <input class="board__checkbox" type="checkbox" id="4">
+                <label class="hero board__item" for="4"></label>
+                <input class="board__checkbox" type="checkbox" id="5">
+                <label class="hero board__item" for="5"></label>
+                <input class="board__checkbox" type="checkbox" id="6">
+                <label class="hero board__item" for="6"></label>
+                <input class="board__checkbox" type="checkbox" id="7">
+                <label class="hero board__item" for="7"></label>
+                <input class="board__checkbox" type="checkbox" id="8">
+                <label class="hero board__item" for="8"></label>
             </div>
-            <div class="board" id="board"></div>
-            <div class="dialog start" id="start">
-                <p class="dialog__start-text">Please choose a player:</p>
-                <div class="dialog__start-heroes">
-                    <div class="board__item cat" id="playerX"></div>
-                    <div class="board__item fish" id="playerO" ></div>
+            <div class="dialog" id="dialog-start">
+                <p class="dialog__text">Select character</p>
+                <div class="dialog__content">
+                    <input class="dialog__radio" type="radio" name="hero" value="playerX" id="playerX">
+                    <label class="hero" for="playerX">
+                        <img class="hero__img" src="./images/monster-1.svg" alt="monster-1">
+                    </label>
+                    <input class="dialog__radio" type="radio" name="hero" value="playerO" id="playerO">
+                    <label class="hero" for="playerO">
+                        <img class="hero__img" src="./images/monster-2.svg" alt="monster-2">
+                    </label>
                 </div>
+                <button class="button" id="start-button" type="button">Start</button>
             </div>
-            <div class="dialog winner hidden" id="winner">
-                <div class="winner-content">
-                    <div class="winner-text" id="message">
-                        <div class="winner-message"></div>
-                    </div>
-                    <button (onClick)="resetGame()" id="resetButton" class="button">New Game</button>
-                </div>
+            <div class="dialog visually-hidden" id="dialog-result">
+                <div class="dialog__content" id="winner-img"></div>
+                <div class="dialog__text" id="message"></div>
+                <button (onClick)="resetGame()" id="restart-button" class="button">New Game</button>
             </div>
         </div>
-       
-        <footer class="siteFooter">
-            All Rights Reserved©2021
-        </footer>
     </body>
 </html>
