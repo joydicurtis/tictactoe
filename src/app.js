@@ -1,6 +1,7 @@
 'use strict';
 import winSound from './assets/sounds/win.wav'; 
 import stepSound from './assets/sounds/step.wav';
+import './assets/images/lanscape-bg.svg';
 import './assets/images/monster-1.svg';
 import './assets/images/monster-2.svg';
 
