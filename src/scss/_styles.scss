@@ -101,9 +101,9 @@ body {
         width: 12rem;
         height: 12rem;
     }
-    &:after {
-        content: '';
-        opacity: 0;
+    &:hover,
+    &:active {
+        border: 1px solid $color-border;
     }
     &__img {
         width: 4rem;

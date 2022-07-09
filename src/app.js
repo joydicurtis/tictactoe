@@ -15,7 +15,6 @@ class TicTacToe {
     this.huPlayer = {};
     this.aiPlayer = {};
     this.board = [];
-    this.turnCount = 0;
 
     this.boardCheckboxes = document.getElementsByClassName('board__checkbox');
     this.boardCells = document.querySelectorAll('.board__item');
@@ -31,7 +30,7 @@ class TicTacToe {
     let startButton = document.getElementById('start-button');
     let resetButton = document.getElementById('reset-button');
     let reStartButton = document.getElementById('restart-button');
-    let muteButton = document.getElementById('mute-button');
+    this.muteButton = document.getElementById('mute-button');
     
     this.stepAudio = document.createElement("audio");
     this.winAudio = document.createElement("audio");
@@ -55,7 +54,7 @@ class TicTacToe {
     resetButton.addEventListener('click', (e) => {
       this.chooseHero(e)
     });
-    muteButton.addEventListener('click', () => { 
+    this.muteButton.addEventListener('click', () => { 
       this.muteSound();
     })
     
@@ -91,27 +90,31 @@ class TicTacToe {
   }
 
   makeStep(firstPlayer, secondPlayer, id) {
-    const emptyFields = this.getEmptyFields();
-    if (emptyFields.length !== 0) {
-      if (!this.winCheck(this.board, secondPlayer.type)) {
-        let cell = document.querySelector('label[for="' + id + '"]');
-        let checkbox = document.getElementById(id);
-        cell.innerHTML = firstPlayer.img;
-        checkbox.setAttribute('disabled', true);
-        this.board[+id] = firstPlayer.type;
-        this.stepAudio.play();
-      }
-      if (this.winCheck(this.board, firstPlayer.type)) {
-        for (let i=0; i<this.boardCheckboxes.length; i++) {
-          this.boardCheckboxes[i].setAttribute('disabled', true);
-        }
-        let message = { img: firstPlayer.img, text: firstPlayer.type === 'X' ? 'You Win!' : 'You Lose!' }
-        this.showResult(message);
-      }
-    }
-    else {
+    let cell = document.querySelector('label[for="' + id + '"]');
+    let checkbox = document.getElementById(id);
+    cell.innerHTML = firstPlayer.img;
+    checkbox.setAttribute('disabled', true);
+    this.board[+id] = firstPlayer.type;
+    this.stepAudio.play();
+    this.getWinner(firstPlayer, secondPlayer);
+  }
+
+  getWinner(firstPlayer, secondPlayer) {
+    if (this.turnCount >= 9) {
       let message = { img: firstPlayer.img + secondPlayer.img, text: 'Draw!' };
       this.showResult(message);
+      return;
+    }
+    if (this.winCheck(this.board, firstPlayer.type)) {
+      for (let i=0; i<this.boardCheckboxes.length; i++) {
+        this.boardCheckboxes[i].setAttribute('disabled', true);
+      }
+      let message = { img: firstPlayer.img, text: firstPlayer.type === 'X' ? 'You Win!' : 'You Lose!' }
+      this.showResult(message);
+      return;
+    }
+    if (firstPlayer.type === 'X') {
+      this.aiPlayerMove();
     }
   }
 
@@ -129,9 +132,6 @@ class TicTacToe {
       this.turnCount += 1;
       let id = e.target.id;
       this.makeStep(this.huPlayer, this.aiPlayer, id);
-      if (!this.winCheck(this.board, this.huPlayer.type)) {
-        this.aiPlayerMove();
-      }
     }
   }
 
@@ -139,13 +139,11 @@ class TicTacToe {
     this.turnCount += 1;
     let bestMove = this.minimax(this.board, this.aiPlayer.type);
     this.makeStep(this.aiPlayer, this.huPlayer, bestMove.idx);
-    if (!(this.winCheck(this.board, this.huPlayer.type) || this.winCheck(this.board, this.aiPlayer.type))) {
-      this.huPlayerMove();
-    }
   }
   
   startGame() {
     this.hide(this.dialogResult);
+
     this.turnCount = 0;
     for (let i = 0; i < this.boardCheckboxes.length; i++) {
       this.boardCheckboxes[i].checked = false;
@@ -164,10 +162,10 @@ class TicTacToe {
     this.stepAudio.muted = !this.stepAudio.muted;
     this.winAudio.muted = !this.winAudio.muted;
     if (this.stepAudio.muted) {
-      muteButton.innerHTML='<svg fill="currentColor" class="button__icon" viewBox="0 0 16 17"><path d="m14.798 8.5.975-.974a.778.778 0 0 0 0-1.099l-.2-.2a.778.778 0 0 0-1.099 0l-.974.975-.974-.975a.778.778 0 0 0-1.099 0l-.199.2a.776.776 0 0 0 0 1.099l.974.974-.974.974a.772.772 0 0 0 0 1.099l.199.199a.776.776 0 0 0 1.099 0l.974-.974.974.974a.776.776 0 0 0 1.099 0l.2-.199a.776.776 0 0 0 0-1.099l-.975-.974ZM4.042 4.21A4.038 4.038 0 0 0 0 8.253a4.042 4.042 0 0 0 4.042 4.042h.832l4.726 4.21V0L4.874 4.21h-.832Z"/></svg>';
+      this.muteButton.innerHTML='<svg fill="currentColor" class="button__icon" viewBox="0 0 16 17"><path d="m14.798 8.5.975-.974a.778.778 0 0 0 0-1.099l-.2-.2a.778.778 0 0 0-1.099 0l-.974.975-.974-.975a.778.778 0 0 0-1.099 0l-.199.2a.776.776 0 0 0 0 1.099l.974.974-.974.974a.772.772 0 0 0 0 1.099l.199.199a.776.776 0 0 0 1.099 0l.974-.974.974.974a.776.776 0 0 0 1.099 0l.2-.199a.776.776 0 0 0 0-1.099l-.975-.974ZM4.042 4.21A4.038 4.038 0 0 0 0 8.253a4.042 4.042 0 0 0 4.042 4.042h.832l4.726 4.21V0L4.874 4.21h-.832Z"/></svg>';
     }
     else {
-      muteButton.innerHTML='<svg fill="currentColor" class="button__icon" viewBox="0 0 16 17"><path d="M4.042 4.21A4.038 4.038 0 0 0 0 8.253a4.042 4.042 0 0 0 4.042 4.042h.832l4.726 4.21V0L4.874 4.21h-.832Zm7.072.506L16 3.2V.673l-4.886 4.043M16 9.726V6.778l-4.886 1.475L16 9.726Zm0 6.104v-2.525l-4.886-1.516L16 15.831Z"/></svg>';
+      this.muteButton.innerHTML='<svg fill="currentColor" class="button__icon" viewBox="0 0 16 17"><path d="M4.042 4.21A4.038 4.038 0 0 0 0 8.253a4.042 4.042 0 0 0 4.042 4.042h.832l4.726 4.21V0L4.874 4.21h-.832Zm7.072.506L16 3.2V.673l-4.886 4.043M16 9.726V6.778l-4.886 1.475L16 9.726Zm0 6.104v-2.525l-4.886-1.516L16 15.831Z"/></svg>';
     }
   }
 
@@ -176,6 +174,14 @@ class TicTacToe {
       if (board[comb[i][0]]===player && board[comb[i][1]]===player && board[comb[i][2]]===player) {
         return true;
       }
+    }
+    return false;
+  }
+
+  drawCheck() {
+    let emptyFields = this.getEmptyFields();
+    if (emptyFields.length) {
+      return true
     }
     return false;
   }
